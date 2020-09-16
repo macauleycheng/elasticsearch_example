@@ -17,6 +17,8 @@ curl -XPOST -H "Content-Type: application/json" http://127.0.0.1:9200/logstash/_
 
 curl -XGET -H "Content-Type: application/json" http://127.0.0.1:9200/_nodes/?pretty
 
+curl -XPUT -H  "Content-Type: application/json" http://127.0.0.1:9200/collectd/_settings -d '{"number_of_replicas" : 0}'
+
 curl -XPOST -H "Content-Type: application/json" http://127.0.0.1:9200/_snapshot/my_backup -d '{"type":"fs", "settings":{"location":"/mnt/backup/gotest"}}'
 
 curl -XGET http://127.0.0.1:9200/_snapshot/my_backup/_current
