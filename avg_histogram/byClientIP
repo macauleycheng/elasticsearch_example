@@ -1,0 +1,65 @@
+curl -XGET -H 'Content-Type: application/json' http://127.0.0.1:9200/control_log/_search -d '
+{
+	"sort": [
+		{
+			"@timestamp": {
+				"order": "desc",
+				"unmapped_type": "boolean"
+			}
+		}
+	],
+	"aggs": {
+		"2": {
+			"date_histogram": {
+				"field": "@timestamp",
+				"fixed_interval": "3h",
+				"time_zone": "Asia/Taipei",
+				"min_doc_count": 1
+			}
+		}
+	},
+	"stored_fields": [
+		"*"
+	],
+	"script_fields": {},
+	"docvalue_fields": [
+		{
+			"field": "@timestamp",
+			"format": "date_time"
+		}
+	],
+	"_source": {
+		"excludes": []
+	},
+	"query": {
+		"bool": {
+			"must": [],
+			"filter": [
+				{
+					"match_all": {}
+				},
+				{
+					"match_phrase": {
+						"source": "/var/log/nginx/access.log"
+					}
+				},
+				{
+					"match_phrase": {
+						"clientip": "114.136.221.180"
+					}
+				},
+				{
+					"range": {
+						"@timestamp": {
+							"gte": "2021-08-28T16:00:00.000Z",
+							"lte": "2021-09-04T15:59:59.999Z",
+							"format": "strict_date_optional_time"
+						}
+					}
+				}
+			],
+			"should": [],
+			"must_not": []
+		}
+	}
+}'
