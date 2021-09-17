@@ -10,6 +10,8 @@ curl -XGET http://127.0.0.1:9200/_cat/indices?v
 #delete index
 curl -XDELETE http://127.0.0.1:9200/control_log
 
+curl -XGET http://127.0.0.1:9200/_template/
+
 #set dynamic add field
 curl -XPUT -H "Content-Type: application/json" http://127.0.0.1:9200/filebeat/_settings -d '{"index.mapper.dynamic":true}'
 curl -XGET -H "Content-Type: application/json" http://127.0.0.1:9200/filebeat/_settings
