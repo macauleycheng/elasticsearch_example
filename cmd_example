@@ -10,6 +10,10 @@ curl -XGET http://127.0.0.1:9200/_cat/indices?v
 #delete index
 curl -XDELETE http://127.0.0.1:9200/control_log
 
+curl -XGET http://localhost:9200/_cluster/allocation/explain?pretty
+curl -XGET http://localhost:9200/_cluster/health?pretty=true
+curl -XGET 'http://localhost:9200/_cluster/health?level=indices&pretty' 
+
 curl -XGET http://127.0.0.1:9200/_template/
 
 #set dynamic add field
