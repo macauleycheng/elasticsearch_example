@@ -22,8 +22,6 @@ curl -XGET -H "Content-Type: application/json" http://127.0.0.1:9200/filebeat/_s
 
 curl -XPOST -H "Content-Type: application/json" http://127.0.0.1:9200/_search  --data "@/home/manager/elastic_search_cpu.json"
 
-curl -XPOST -H "Content-Type: application/json" http://127.0.0.1:9200/logstash/_mapping/doc/ -d '{"properties":{"type_instance":{"type":"text","fielddata":true}}}'
-
 curl -XGET -H "Content-Type: application/json" http://127.0.0.1:9200/_nodes/?pretty
 
 curl -XPUT -H  "Content-Type: application/json" http://127.0.0.1:9200/collectd/_settings -d '{"number_of_replicas" : 0}'
@@ -57,3 +55,4 @@ curl -XGET -g -H "Content-Type: application/json" http://127.0.0.1:9200/_search/
 
 #modify mapping
 curl -XPUT http://127.0.0.1:9200/control_log/_mapping/ -H "Content-Type: application/json" -d '{"properties": {"log_ts": {"type": "text", "norms": false, "fielddata": true}}}'
+curl -XPOST -H "Content-Type: application/json" http://127.0.0.1:9200/logstash/_mapping/doc/ -d '{"properties":{"type_instance":{"type":"text","fielddata":true}}}'
