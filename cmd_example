@@ -53,3 +53,7 @@ curl -XPUT -g -H 'Content-Type: application/json' 'http://127.0.0.1:9200/_settin
 #get firt request returned scroll_id to be next search
 curl -XGET -g -H "Content-Type: application/json" http://127.0.0.1:9200/logstash/_search?q=@timestamp:["2018-01-01"+TO+"2018-09-30"]'&'size=2'&'scroll=1m
 curl -XGET -g -H "Content-Type: application/json" http://127.0.0.1:9200/_search/scroll?scroll_id=DnF1ZXJ5VGhlbkZldGNoBQAAAAAABNZdFnNWOFlsU3F2UUFtV0QzZDVrUnpjSGcAAAAAAATWXhZzVjhZbFNxdlFBbVdEM2Q1a1J6Y0hnAAAAAAAE1l8Wc1Y4WWxTcXZRQW1XRDNkNWtSemNIZwAAAAAABNZgFnNWOFlsU3F2UUFtV0QzZDVrUnpjSGcAAAAAAATWYRZzVjhZbFNxdlFBbVdEM2Q1a1J6Y0hn
+
+
+#modify mapping
+curl -XPUT http://127.0.0.1:9200/control_log/_mapping/ -H "Content-Type: application/json" -d '{"properties": {"log_ts": {"type": "text", "norms": false, "fielddata": true}}}'
