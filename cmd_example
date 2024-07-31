@@ -57,3 +57,8 @@ curl -XGET -g -H "Content-Type: application/json" http://127.0.0.1:9200/_search/
 curl -XPUT http://127.0.0.1:9200/control_log/_mapping/ -H "Content-Type: application/json" -d '{"properties": {"log_ts": {"type": "text", "norms": false, "fielddata": true}}}'
 curl -XPOST -H "Content-Type: application/json" http://127.0.0.1:9200/logstash/_mapping/doc/ -d '{"properties":{"type_instance":{"type":"text","fielddata":true}}}'
 curl -XGET http://127.0.0.1:9200/control_log/_mapping/
+
+
+#unlock readonly
+curl -X PUT "http://localhost:9200/collectd/_settings" -H "Content-Type:application/json" -d '{"index.blocks.read_only_allow_delete":null}'
+
